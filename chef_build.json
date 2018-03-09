@@ -1,0 +1,52 @@
+{
+  "variables": {
+    "source_ami": "ami-43a15f3e",
+    "instance_type": "t2.micro",
+    "chef_validation_key": "{{env `CHEF_VALIDATION_KEY` }}",
+    "chef_client_name": "{{env `CHEF_CLIENT_NAME` }}",
+    "chef_server_url": "{{env `CHEF_SERVER_URL`}}",
+    "working_dir": "{{env `PWD`}}",
+    "home_dir": "{{env `HOME`}}",
+    "service_name": ""
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "us-east-1",
+      "source_ami": "{{user `source_ami`}}",
+      "instance_type": "{{user `instance_type`}}",
+      "ssh_username": "ubuntu",
+      "ami_name": "{{user `service_name`}}"
+    }
+  ],
+  "provisioners": [
+    {
+        "type": "shell",
+        "inline": [
+          "sudo apt-get update",
+          "sudo apt-get install -y curl",
+          "sudo apt-get install -y python",
+          "curl -L https://www.chef.io/chef/install.sh | sudo bash",
+          "mkdir -p /tmp/packer-chef-client"
+        ]
+    },
+    {
+        "type": "file",
+        "source": "{{user `home_dir`}}/.chef/encrypted_data_bag_secret",
+        "destination": "/tmp/packer-chef-client/encrypted_data_bag_secret"
+    },
+    {
+        "type": "chef-client",
+        "server_url": "{{user `chef_server_url`}}",
+        "chef_environment": "{{user `env`}}",
+        "run_list": "role[{{user `role`}}]",
+        "ssl_verify_mode": "verify_none",
+        "validation_key_path": "{{user `chef_validation_key` }}",
+        "validation_client_name": "{{user `chef_client_name` }}",
+        "node_name": "{{user `role`}}-{{user `env`}}",
+        "json": {
+          "encrypted_data_bag_secret_path": "/tmp/packer-chef-client/encrypted_data_bag_secret"
+        }
+    }
+  ]
+}
