@@ -4,9 +4,9 @@ data "aws_ami" "service_ami" {
 
   filter {
     name   = "name"
-    values = ["${var.service_name}*"]
+    values = ["${var.company_name}-${var.org_name}-${var.service_name}"]
   }
 
-  name_regex = "^${var.service_name}-\\d{3}"
+  name_regex = "${var.company_name}-${var.org_name}-${var.service_name}"
   owners     = ["self"]
 }
