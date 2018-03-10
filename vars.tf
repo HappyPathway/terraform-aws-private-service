@@ -7,14 +7,21 @@ variable "subnet_cidr" {}
 
 
 variable "service_name" {}
-variable "service_port" {}
+variable "service_port" {
+  default = 80
+}
 variable "service_healthcheck" {}
+
 variable "service_access" {
   default = "0.0.0.0/0"
 }
 
 variable "ssh_access" {
-  default = "60.242.xxx.xxx/32"
+  default = "0.0.0.0/0"
+}
+
+variable "docker_access" {
+  default = "0.0.0.0/0"
 }
 
 variable "instance_type" {}
