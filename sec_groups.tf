@@ -1,18 +1,19 @@
 resource "aws_security_group" "service" {
 	name = "${var.service_name}-nodes"
 	vpc_id = "${aws_vpc.service_vpc.id}"
+
 	ingress {
-		from_port = "${var.service_port}"
-		to_port = "${var.service_port}"
-		protocol = "tcp"
-		cidr_blocks = ["0.0.0.0/0"]
+		from_port = 0
+		to_port = 0
+		protocol = -1
+		security_groups = ["${aws_security_group.elb.id}"]
 	}
 
   ingress {
   	from_port = "2376"
   	to_port = "2376"
   	protocol = "tcp"
-  	cidr_blocks = ["0.0.0.0/0"]
+  	cidr_blocks = ["${var.docker_access}"]
   }
   
 	egress {
