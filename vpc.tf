@@ -1,7 +1,7 @@
 resource "aws_vpc" "service_vpc" {
   cidr_block       = "${var.vpc_cidr}"
   tags {
-    Name = "${var.service_name}"
+    Name = "${var.company_name}-${var.org_name}-${var.service_name}"
   }
 }
 
@@ -10,7 +10,7 @@ resource "aws_subnet" "server_subnet" {
   cidr_block = "${var.subnet_cidr}"
   map_public_ip_on_launch = true
   tags {
-    Name = "${var.service_name}"
+    Name = "${var.company_name}-${var.org_name}-${var.service_name}"
   }
 }
 
@@ -27,7 +27,7 @@ resource "aws_route_table" "default" {
     }
 
     tags {
-        Name = "${var.service_name}"
+        Name = "${var.company_name}-${var.org_name}-${var.service_name}"
     }
 }
 

@@ -7,10 +7,13 @@ resource "aws_autoscaling_group" "scalegroup" {
 	load_balancers= ["${aws_elb.service.id}"]
 	vpc_zone_identifier = ["${aws_subnet.server_subnet.id}"]
 	health_check_type="ELB"
-	name = "${var.service_name}-asg"
+	default_cooldown = "${var.default_cooldown}"
+	
+	name = "${var.company_name}-${var.org_name}-${var.service_name}"
+	
 	tag {
-		key = "role"
-		value = "${var.company_name}-${var.org_name}-${var.service_name}-asg"
+		key = "service_name"
+		value = "${var.service_name}"
 		propagate_at_launch = true
 	}
 	

@@ -3,7 +3,7 @@ resource "aws_launch_configuration" "service" {
 	instance_type = "${var.instance_type}"
 	security_groups = ["${aws_security_group.service.id}"]
 	key_name = "${var.key_name}"
-
+  name = "${var.company_name}-${var.org_name}-${var.service_name}"
 	lifecycle {
 		create_before_destroy = true
 	}

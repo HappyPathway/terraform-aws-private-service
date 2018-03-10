@@ -1,5 +1,5 @@
 variable "region" {
-	default = "us-east-1"
+  default = "us-east-1"
 }
 
 variable "vpc_cidr" {}
@@ -41,4 +41,16 @@ variable "min_size" {
 
 variable  "max_size" {
   default = 3
+}
+
+variable "high_cpu" {
+  default = 85
+}
+
+variable "low_cpu" {
+  default = 35
+}
+
+variable "default_cooldown" {
+  default = 600
 }

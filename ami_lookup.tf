@@ -1,12 +1,21 @@
 data "aws_ami" "service_ami" {
-  most_recent      = true
-  executable_users = ["self"]
-
+  filter {  
+    name   = "state"  
+    values = ["available"]  
+  }  
   filter {
-    name   = "name"
-    values = ["${var.company_name}-${var.org_name}-${var.service_name}"]
+    name   = "tag:company_name"
+    values = ["${var.company_name}"]
   }
 
-  name_regex = "${var.company_name}-${var.org_name}-${var.service_name}"
-  owners     = ["self"]
+  filter {
+    name = "tag:service_name"
+    values = ["${var.service_name}"]
+  }
+
+  filter {
+    name = "tag:org_name"
+    values = ["${var.org_name}"]
+  }
+  most_recent = true
 }

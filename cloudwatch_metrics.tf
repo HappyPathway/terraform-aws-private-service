@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_metric_alarm" "cpualarm" {
-	alarm_name = "terraform-alarm"
+	alarm_name = "${var.company_name}-${var.org_name}-${var.service_name}-cpu_up"
 	comparison_operator = "GreaterThanOrEqualToThreshold"
 	evaluation_periods = 2
 	metric_name = "CPUUtilization"
@@ -17,7 +17,7 @@ resource "aws_cloudwatch_metric_alarm" "cpualarm" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpualarm-down" {
-	alarm_name = "terraform-alarm-down"
+	alarm_name = "${var.company_name}-${var.org_name}-${var.service_name}-cpu_down"
 	comparison_operator = "LessThanOrEqualToThreshold"
 	evaluation_periods = 2
 	metric_name = "CPUUtilization"

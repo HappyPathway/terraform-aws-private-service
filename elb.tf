@@ -7,7 +7,7 @@
 #}
 
 resource "aws_elb" "service" {
-	name = "${var.service_name}"
+	name = "${var.company_name}-${var.org_name}-${var.service_name}"
 	subnets = ["${aws_subnet.server_subnet.id}"]
 	security_groups = ["${aws_security_group.elb.id}"]
 	#access_logs {
@@ -42,8 +42,8 @@ resource "aws_elb" "service" {
 
 
 resource "aws_lb_cookie_stickiness_policy" "cookie_stickness" {
-	name = "cookiestickness"
+	name = "${var.company_name}-${var.org_name}-${var.service_name}-cookiestickness"
 	load_balancer = "${aws_elb.service.id}"
-	lb_port = 80
+	lb_port = "${var.service_port}"
 	cookie_expiration_period = 600
 }
