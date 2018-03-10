@@ -1,12 +1,19 @@
+#resource "aws_s3_bucket" "bucket" {
+#  bucket = "${lower(var.company_name)}-${lower(var.org_name)}-${lower(var.service_name)}-access-logs"
+#  tags {
+#    Name        = "${lower(var.company_name)}-${lower(var.org_name)}-${lower(var.service_name)}-access-logs"
+#    Environment = "${var.company_name}-${var.org_name}"
+#  }
+#}
+
 resource "aws_elb" "service" {
 	name = "${var.service_name}"
 	subnets = ["${aws_subnet.server_subnet.id}"]
 	security_groups = ["${aws_security_group.elb.id}"]
-	access_logs {
-		bucket = "${var.company_name}-${var.org_name}-access-logs"
-		bucket_prefix = "${var.service_name}"
-		interval = 5
-	}
+	#access_logs {
+	#	bucket = "${aws_s3_bucket.bucket.tags.Name}"
+	#	interval = 5
+	#}
 
 	listener {
 		instance_port = "${var.service_port}"

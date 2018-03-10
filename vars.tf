@@ -23,3 +23,15 @@ variable "org_name" {}
 
 
 variable "key_name" {}
+
+variable "image_id" {
+  default = "ami-43a15f3e"
+}
+
+variable "min_size" {
+  default = 1
+} 
+
+variable  "max_size" {
+  default = 3
+}
