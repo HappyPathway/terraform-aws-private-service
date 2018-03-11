@@ -1,11 +1,9 @@
-variable "region" {
-  default = "us-east-1"
-}
-
 variable "service_name" {}
+
 variable "service_port" {
   default = 80
 }
+
 variable "service_healthcheck" {}
 
 variable "service_access" {
@@ -23,7 +21,7 @@ variable "docker_access" {
 variable "instance_type" {}
 variable "company_name" {}
 variable "org_name" {}
-
+variable "domain" {}
 
 variable "key_name" {}
 
@@ -33,9 +31,9 @@ variable "image_id" {
 
 variable "min_size" {
   default = 1
-} 
+}
 
-variable  "max_size" {
+variable "max_size" {
   default = 3
 }
 
@@ -53,3 +51,39 @@ variable "default_cooldown" {
 
 variable "subnet_id" {}
 variable "vpc_id" {}
+
+variable "service_healthcheck_healthy_threshold" {
+  default = 2
+}
+
+variable "service_healthcheck_unhealthy_threshold" {
+  default = 3
+}
+
+variable "service_healthcheck_timeout" {
+  default = 3
+}
+
+variable "service_healthcheck_interval" {
+  default = 30
+}
+
+variable "instance_protocol" {
+  default = "http"
+}
+
+variable "cross_zone_load_balancing" {
+  default = true
+}
+
+variable "connection_draining_timeout" {
+  default = 400
+}
+
+variable "connection_draining" {
+  default = true
+}
+
+variable "idle_timeout" {
+  default = 400
+}
