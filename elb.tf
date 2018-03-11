@@ -8,7 +8,7 @@
 
 resource "aws_elb" "service" {
 	name = "${var.company_name}-${var.org_name}-${var.service_name}"
-	subnets = ["${aws_subnet.server_subnet.id}"]
+	subnets = ["${var.subnet_id}"]
 	security_groups = ["${aws_security_group.elb.id}"]
 	#access_logs {
 	#	bucket = "${aws_s3_bucket.bucket.tags.Name}"

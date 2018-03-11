@@ -2,10 +2,6 @@ variable "region" {
   default = "us-east-1"
 }
 
-variable "vpc_cidr" {}
-variable "subnet_cidr" {}
-
-
 variable "service_name" {}
 variable "service_port" {
   default = 80
@@ -54,3 +50,6 @@ variable "low_cpu" {
 variable "default_cooldown" {
   default = 600
 }
+
+variable "subnet_id" {}
+variable "vpc_id" {}
