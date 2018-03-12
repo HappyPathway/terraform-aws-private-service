@@ -49,7 +49,8 @@ variable "default_cooldown" {
   default = 600
 }
 
-variable "subnet_id" {}
+variable "public_subnet_id" {}
+variable "private_subnet_id" {}
 variable "vpc_id" {}
 
 variable "service_healthcheck_healthy_threshold" {

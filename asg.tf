@@ -5,7 +5,7 @@ resource "aws_autoscaling_group" "scalegroup" {
   enabled_metrics      = ["GroupMinSize", "GroupMaxSize", "GroupDesiredCapacity", "GroupInServiceInstances", "GroupTotalInstances"]
   metrics_granularity  = "1Minute"
   load_balancers       = ["${aws_elb.service.id}"]
-  vpc_zone_identifier  = ["${var.subnet_id}"]
+  vpc_zone_identifier  = ["${var.private_subnet_id}"]
   health_check_type    = "ELB"
   default_cooldown     = "${var.default_cooldown}"
 
