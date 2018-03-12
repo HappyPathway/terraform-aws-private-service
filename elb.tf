@@ -7,8 +7,9 @@
 #}
 resource "aws_elb" "service" {
   name            = "${var.company_name}-${var.org_name}-${var.service_name}"
-  subnets         = ["${var.public_subnet_id}"]
+  subnets         = ["${var.private_subnet_id}"]
   security_groups = ["${aws_security_group.service.id}"]
+  internal = true
 
   #access_logs {
   #	bucket = "${aws_s3_bucket.bucket.tags.Name}"

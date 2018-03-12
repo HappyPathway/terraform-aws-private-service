@@ -10,6 +10,20 @@ resource "aws_security_group" "service" {
   }
 
   ingress {
+    from_port       = 0
+    to_port         = 0
+    protocol        = -1
+    self            = true
+  }
+
+  ingress {
+    from_port       = 4789
+    to_port         = 4789
+    protocol        = "udp"
+    self            = true
+  }
+  
+  ingress {
     from_port   = "2376"
     to_port     = "2376"
     protocol    = "tcp"
@@ -27,6 +41,7 @@ resource "aws_security_group" "service" {
     create_before_destroy = true
   }
 }
+
 
 resource "aws_security_group_rule" "ssh" {
   security_group_id = "${aws_security_group.service.id}"

@@ -1,6 +1,7 @@
 data "aws_route53_zone" "selected" {
   name         = "${var.domain}"
-  private_zone = false
+  # private_zone = true
+  vpc_id = "${var.vpc_id}"
 }
 
 resource "aws_route53_record" "service" {
