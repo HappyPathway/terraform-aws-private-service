@@ -9,7 +9,7 @@ resource "aws_autoscaling_group" "scalegroup" {
   health_check_type    = "ELB"
   default_cooldown     = "${var.default_cooldown}"
 
-  name = "${var.company_name}-${var.org_name}-${var.service_name}"
+  name = "${var.service_name}-${var.service_version}-${var.env}"
 
   tag {
     key                 = "service_name"
@@ -18,20 +18,14 @@ resource "aws_autoscaling_group" "scalegroup" {
   }
 
   tag {
-    key                 = "company_name"
-    value               = "${var.company_name}"
+    key                 = "service_version"
+    value               = "${var.service_name}"
     propagate_at_launch = true
   }
 
   tag {
-    key                 = "org_name"
-    value               = "${var.org_name}"
-    propagate_at_launch = true
-  }
-
-  tag {
-    key                 = "Name"
-    value               = "${var.company_name}-${var.org_name}-${var.service_name}"
+    key                 = "env"
+    value               = "${var.env}"
     propagate_at_launch = true
   }
 }

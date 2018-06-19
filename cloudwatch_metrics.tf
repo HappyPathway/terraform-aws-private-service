@@ -1,12 +1,12 @@
 resource "aws_cloudwatch_metric_alarm" "cpualarm" {
-  alarm_name          = "${var.company_name}-${var.org_name}-${var.service_name}-cpu_up"
+  alarm_name          = "${var.service_name}-${var.service_version}-${var.env}-cpu_up"
   comparison_operator = "GreaterThanOrEqualToThreshold"
-  evaluation_periods  = 2
+  evaluation_periods  = "${var.cloudwatch_evaluation_perios}"
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
-  period              = 120
+  period              = "${var.cloudwatch_metric_interval}"
   statistic           = "Average"
-  threshold           = 60
+  threshold           = "${var.high_cpu}"
 
   dimensions {
     AutoScalingGroupName = "${aws_autoscaling_group.scalegroup.name}"
@@ -17,14 +17,14 @@ resource "aws_cloudwatch_metric_alarm" "cpualarm" {
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpualarm-down" {
-  alarm_name          = "${var.company_name}-${var.org_name}-${var.service_name}-cpu_down"
+  alarm_name          = "${var.service_name}-${var.service_version}-${var.env}-cpu_down"
   comparison_operator = "LessThanOrEqualToThreshold"
-  evaluation_periods  = 2
+  evaluation_periods  = "${var.cloudwatch_evaluation_perios}"
   metric_name         = "CPUUtilization"
   namespace           = "AWS/EC2"
-  period              = 120
+  period              = "${var.cloudwatch_metric_interval}"
   statistic           = "Average"
-  threshold           = 10
+  threshold           = "${var.low_cpu}"
 
   dimensions {
     AutoScalingGroupName = "${aws_autoscaling_group.scalegroup.name}"

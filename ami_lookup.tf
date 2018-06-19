@@ -5,18 +5,13 @@ data "aws_ami" "service_ami" {
   }
 
   filter {
-    name   = "tag:company_name"
-    values = ["${var.company_name}"]
-  }
-
-  filter {
     name   = "tag:service_name"
     values = ["${var.service_name}"]
   }
 
   filter {
-    name   = "tag:org_name"
-    values = ["${var.org_name}"]
+    name   = "tag:service_version"
+    values = ["${var.service_version}"]
   }
 
   most_recent = true
