@@ -65,7 +65,7 @@ variable "cloudwatch_metric_interval" {
   default     = 120
 }
 
-variable "cloudwatch_evaluation_perios" {
+variable "cloudwatch_evaluation_periods" {
   default     = 2
   description = "How many evaluation periods should fail before an alarm is triggered?"
   type        = "string"
