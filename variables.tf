@@ -8,6 +8,11 @@ variable "service_version" {
   type        = "string"
 }
 
+variable "env" {
+  type        = "string"
+  description = "Generally a team will have multiple environments for developing their service, appropriate names could be dev, staging, or production"
+}
+
 variable "service_port" {
   type        = "string"
   description = "Which port does this service run on?"
