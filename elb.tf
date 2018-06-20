@@ -35,8 +35,8 @@ resource "aws_elb" "service" {
   }
 }
 
-resource "aws_lb_cookie_stickiness_policy" "cookie_stickness" {
-  name                     = "${var.service_name}-${var.service_version}-${var.env}-cookiestickness"
+resource "aws_lb_cookie_stickiness_policy" "cookie_stickiness" {
+  name                     = "${var.service_name}-${join("-", split(".", var.service_version))}-${var.env}-cookiestickness"
   load_balancer            = "${aws_elb.service.id}"
   lb_port                  = "${var.service_port}"
   cookie_expiration_period = 600
