@@ -23,7 +23,7 @@ resource "aws_elb" "service" {
     healthy_threshold   = "${var.service_healthcheck_healthy_threshold}"
     unhealthy_threshold = "${var.service_healthcheck_unhealthy_threshold}"
     timeout             = "${var.service_healthcheck_timeout}"
-    target              = "HTTP:${var.service_port}/${var.service_healthcheck}"
+    target              = "TCP:${var.service_port}"
     interval            = "${var.service_healthcheck_interval}"
   }
   cross_zone_load_balancing   = "${var.cross_zone_load_balancing}"
