@@ -1,12 +1,5 @@
-#resource "aws_s3_bucket" "bucket" {
-#  bucket = "${lower(var.company_name)}-${lower(var.org_name)}-${lower(var.service_name)}-access-logs"
-#  tags {
-#    Name        = "${lower(var.company_name)}-${lower(var.org_name)}-${lower(var.service_name)}-access-logs"
-#    Environment = "${var.company_name}-${var.org_name}"
-#  }
-#}
 resource "aws_elb" "service" {
-  name            = "${var.company_name}-${var.org_name}-${var.service_name}"
+  name            = "${var.service_name}-${var.service_version}-${var.env}"
   subnets         = ["${var.private_subnet_id}"]
   security_groups = ["${aws_security_group.service.id}"]
   internal        = true
@@ -38,12 +31,12 @@ resource "aws_elb" "service" {
   connection_draining         = "${var.connection_draining}"
   connection_draining_timeout = "${var.connection_draining_timeout}"
   tags {
-    Name = "${var.company_name}-${var.org_name}-${var.service_name}"
+    Name = "${var.service_name}-${var.service_version}-${var.env}"
   }
 }
 
 resource "aws_lb_cookie_stickiness_policy" "cookie_stickness" {
-  name                     = "${var.company_name}-${var.org_name}-${var.service_name}-cookiestickness"
+  name                     = "${var.service_name}-${var.service_version}-${var.env}-cookiestickness"
   load_balancer            = "${aws_elb.service.id}"
   lb_port                  = "${var.service_port}"
   cookie_expiration_period = 600
