@@ -22,8 +22,9 @@ resource "aws_elb" "service" {
     lb_port           = "${var.service_port}"
 
     # lb_protocol = "${var.lb_protocol}"
-    lb_protocol        = "https"
-    ssl_certificate_id = "${data.aws_acm_certificate.service.arn}"
+    lb_protocol = "http"
+
+    # ssl_certificate_id = "${data.aws_acm_certificate.service.arn}"
   }
   health_check {
     healthy_threshold   = "${var.service_healthcheck_healthy_threshold}"
