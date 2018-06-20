@@ -19,7 +19,7 @@ resource "aws_autoscaling_group" "scalegroup" {
 
   tag {
     key                 = "service_version"
-    value               = "${var.service_name}"
+    value               = "${var.service_version}"
     propagate_at_launch = true
   }
 
