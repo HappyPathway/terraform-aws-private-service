@@ -140,3 +140,9 @@ variable "connection_draining" {
 variable "idle_timeout" {
   default = 400
 }
+
+variable "resource_tags" {
+  description = "Optional map of tags to set on resources, defaults to empty map."
+  type        = "map"
+  default     = {}
+}
