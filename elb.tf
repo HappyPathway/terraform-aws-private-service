@@ -30,9 +30,7 @@ resource "aws_elb" "service" {
   idle_timeout                = "${var.idle_timeout}"
   connection_draining         = "${var.connection_draining}"
   connection_draining_timeout = "${var.connection_draining_timeout}"
-  tags {
-    Name = "${var.service_name}-${var.service_version}-${var.env}"
-  }
+  tags                        = "${merge(map("Name", "${var.service_name}-${var.service_version}-${var.env}"), var.resource_tags)}"
 }
 
 resource "aws_lb_cookie_stickiness_policy" "cookie_stickiness" {
